@@ -11,7 +11,8 @@
   "author": "Fayzullo Jo'rayev",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-edge": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

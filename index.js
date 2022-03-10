@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path")
 const app = express();
+const expressEdge = require("express-edge");
 
 app.use(express.static("public"))
+app.use(expressEdge.engine)
+app.set("views", `${__dirname}/views`)
+
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "pages", "index.html"))
+    res.render("index")
 })
 
 app.get("/about", (req, res) => {
