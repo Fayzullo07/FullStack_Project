@@ -1,8 +1,22 @@
 const express = require("express");
+const path = require("path")
 const app = express();
 
+app.use(express.static("public"))
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.sendFile(path.resolve(__dirname, "pages", "index.html"))
 })
 
-app.listen(5001, () => {console.log("Server has been started on Port 5001...")})
+app.get("/about", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "pages", "about.html"))
+})
+
+app.get("/contact", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "pages", "contact.html"))
+})
+
+app.get("/post", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "pages", "post.html"))
+})
+
+app.listen(5000, () => {console.log("Server has been started on Port 5000...")})
