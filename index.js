@@ -1,7 +1,13 @@
 const express = require("express");
-const path = require("path")
-const app = express();
+const path = require("path");
 const expressEdge = require("express-edge");
+const mongoose = require("mongoose");
+
+const app = express();
+
+mongoose.connect("mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog", () => {
+    console.log("Database created successfully!")
+})
 
 app.use(express.static("public"))
 app.use(expressEdge.engine)
@@ -12,15 +18,15 @@ app.get("/", (req, res) => {
 })
 
 app.get("/about", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "pages", "about.html"))
+    res.render("about")
 })
 
 app.get("/contact", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "pages", "contact.html"))
+    res.render("contact")
 })
 
 app.get("/post", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "pages", "post.html"))
+    res.render("post")
 })
 
 app.listen(5000, () => {console.log("Server has been started on Port 5000...")})
