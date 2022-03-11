@@ -7,8 +7,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Contact Me</h1>
-                    <span class="subheading">Have questions? I have answers.</span>
+                    <h1>Create Post</h1>
+                    <span class="subheading">You can say everythink what do you want</span>
                 </div>
             </div>
         </div>
@@ -19,6 +19,10 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <form action="/posts/create" method="POST">
+                <div class="form-floating">
+                    <input type="username" class="form-control" name="username" placeholder="Enter your Username...">
+                    <label>Username</label>
+                </div>
                 <div class="form-floating">
                     <input type="text" class="form-control" name="title" placeholder="Enter your name...">
                     <label>Title</label>
