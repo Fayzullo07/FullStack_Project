@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <form action="/posts/create" method="POST">
+            <form action="/posts/create" method="POST" enctype="multipart/form-data">
                 <div class="form-floating">
                     <input type="username" class="form-control" name="username" placeholder="Enter your Username...">
                     <label>Username</label>
@@ -34,6 +34,9 @@
                 <div class="form-floating">
                     <textarea name="content" class="form-control" placeholder="Enter your Content..."></textarea>
                     <label>Content</label>
+                </div>
+                <div class="form-floating mt-3">
+                    <input class="form-control" name="image" type="file" id="formFilen">
                 </div>
                 <div class="form-group text-center my-4">
                     <button class="btn btn-primary">Create Post</button>
