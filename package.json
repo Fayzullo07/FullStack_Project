@@ -11,6 +11,7 @@
   "author": "Fayzullo Jo'rayev",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
     "express-edge": "^2.0.2",
     "express-fileupload": "^1.3.1",
