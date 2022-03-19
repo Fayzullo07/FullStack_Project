@@ -9,7 +9,8 @@ const getPostsController = require("./controllers/getPosts");
 const postsNewController = require("./controllers/postsNew");
 const createPostController = require("./controllers/createPost");
 const createUserController = require('./controllers/createUser');
-const storeUserController = require("./controllers/userStore")
+const storeUserController = require("./controllers/userStore");
+const loginControllrer = require('./controllers/login');
 
 const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
 const app = express();
@@ -29,5 +30,6 @@ app.get("/posts/new", postsNewController);
 app.post("/posts/create", validatCreatePostMiddleware, createPostController);
 app.get("/reg", createUserController);
 app.post("/auth/reg", storeUserController);
+app.get("/login", loginControllrer);
 
 app.listen(5000, () => {console.log("Server has been started on Port 5000...")})
