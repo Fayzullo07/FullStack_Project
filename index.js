@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
 const expressSession = require("express-session");
 const mongoStore = require("connect-mongo");
+const connectFlash = require("connect-flash");
 
 
 const homePageController = require("./controllers/homePage");
@@ -35,6 +36,7 @@ app.use(expressEdge.engine)
 app.set("views", `${__dirname}/views`)
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(connectFlash());
 
 app.get("/", homePageController);
 app.get("/post/:id", getPostsController);
