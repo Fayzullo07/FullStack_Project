@@ -2,7 +2,8 @@ const express = require("express");
 const expressEdge = require("express-edge");
 const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
-const expressSession = require("express-session")
+const expressSession = require("express-session");
+const mongoStore = require("connect-mongo");
 
 
 const homePageController = require("./controllers/homePage");
@@ -14,14 +15,18 @@ const storeUserController = require("./controllers/userStore");
 const loginControllrer = require('./controllers/login');
 const loginStoreController = require('./controllers/loginStore');
 
-const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
 const app = express();
+
+const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
+
+const MongoUrl = "mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog";
+
+mongoose.connect(MongoUrl);
+
 app.use(expressSession({
     secret: "samar",
-
+    store: mongoStore.create({mongoUrl: MongoUrl})
 }))
-
-mongoose.connect("mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog");
 
 app.use(fileUpload());
 app.use(express.static("public"))
