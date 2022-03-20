@@ -2,6 +2,7 @@ const express = require("express");
 const expressEdge = require("express-edge");
 const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
+const expressSession = require("express-session")
 
 
 const homePageController = require("./controllers/homePage");
@@ -15,6 +16,10 @@ const loginStoreController = require('./controllers/loginStore');
 
 const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
 const app = express();
+app.use(expressSession({
+    secret: "samar",
+
+}))
 
 mongoose.connect("mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog");
 

@@ -3,19 +3,16 @@ const bcrypt = require('bcrypt');
 
 module.exports = (req, res) => {
     const {password, email} = req.body;
-    User.findOne({email}, (err, user) => {
-        console.log(user)
+    User.findOne({email}, async (err, user) => {
         if(user){
-            bcrypt.compare(password, user.password, (err, same) => {
-                if(same){
-                    res.redirect("/")
-                }else{
-                    res.redirect('/login')
-                }
-            })
+           const validPassword = await bcrypt.compare(password, user.password);
+            if(validPassword) {
+                res.redirect("/");
+            }else{
+                res.redirect("/login")
+            }
         }else{
-            res.redirect("/login")
+            return res.redirect('/login')
         }
     })
-    res.redirect('/');
 }
