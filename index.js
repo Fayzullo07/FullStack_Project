@@ -15,11 +15,13 @@ const createUserController = require('./controllers/createUser');
 const storeUserController = require("./controllers/userStore");
 const loginControllrer = require('./controllers/login');
 const loginStoreController = require('./controllers/loginStore');
+const logoutController = require("./controllers/logout");
 
 const app = express();
 
 const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
 const authMiddleware = require("./middleware/auth");
+const redirectIfAuth = require("./middleware/redirect");
 
 const MongoUrl = "mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog";
 
@@ -33,18 +35,24 @@ app.use(expressSession({
 app.use(fileUpload());
 app.use(express.static("public"))
 app.use(expressEdge.engine)
-app.set("views", `${__dirname}/views`)
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(connectFlash());
 
+app.set("views", `${__dirname}/views`);
+
+app.use("*", (req, res, next) => {
+    app.locals.auth = req.session.userId;
+    next();
+})
 app.get("/", homePageController);
 app.get("/post/:id", getPostsController);
 app.get("/posts/new", authMiddleware, postsNewController);
 app.post("/posts/create", authMiddleware, validatCreatePostMiddleware, createPostController);
-app.get("/reg", createUserController);
+app.get("/reg", redirectIfAuth, createUserController);
 app.post("/auth/reg", storeUserController);
-app.get("/login", loginControllrer);
+app.get("/login", redirectIfAuth, loginControllrer);
 app.post("/auth/log", loginStoreController);
+app.get("/logout", authMiddleware, logoutController);
 
 app.listen(5000, () => {console.log("Server has been started on Port 5000...")})
