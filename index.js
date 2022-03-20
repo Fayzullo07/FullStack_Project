@@ -18,6 +18,7 @@ const loginStoreController = require('./controllers/loginStore');
 const app = express();
 
 const validatCreatePostMiddleware = require("./middleware/validationMiddleware");
+const authMiddleware = require("./middleware/auth");
 
 const MongoUrl = "mongodb+srv://fayzullo:F4995875f@cluster0.tpf56.mongodb.net/node_blog";
 
@@ -37,8 +38,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.get("/", homePageController);
 app.get("/post/:id", getPostsController);
-app.get("/posts/new", postsNewController);
-app.post("/posts/create", validatCreatePostMiddleware, createPostController);
+app.get("/posts/new", authMiddleware, postsNewController);
+app.post("/posts/create", authMiddleware, validatCreatePostMiddleware, createPostController);
 app.get("/reg", createUserController);
 app.post("/auth/reg", storeUserController);
 app.get("/login", loginControllrer);
