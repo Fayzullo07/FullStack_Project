@@ -7,7 +7,7 @@ module.exports = (req, res) => {
         if(err){
             console.log(err)
         }
-        Post.create({...req.body, image: `/posts/${image.name}`}, (err, post) => {
+        Post.create({...req.body, image: `/posts/${image.name}`, author: req.session.userId}, (err, post) => {
             res.redirect('/')
         })
     })
